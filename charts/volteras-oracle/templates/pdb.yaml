@@ -1,0 +1,12 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  namespace: {{ .Release.Namespace }}
+  name: {{ include "dimo-oracle.fullname" . }}
+  labels:
+    {{- include "dimo-oracle.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+    {{- include "dimo-oracle.selectorLabels" . | nindent 6 }}
+{{ toYaml .Values.podDisruptionBudget | indent 2 }}

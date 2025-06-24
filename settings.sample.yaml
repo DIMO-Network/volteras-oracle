@@ -1,0 +1,38 @@
+## Example settings. Many of these you'll need to change.
+# More information as well as which should be secrets in internal/config/settings.go
+
+ENVIRONMENT: 'local' # eg. local, dev, prod
+LOG_LEVEL: 'debug'
+PORT: 8082 # web server port
+MONITORING_PORT: 8083
+DB_PORT: '5432'
+DB_NAME: volteras_oracle
+DB_MAX_OPEN_CONNECTIONS: '10'
+DB_MAX_IDLE_CONNECTIONS: '3'
+DB_HOST: localhost
+DB_USER: dimo
+DB_PASSWORD: dimo
+
+SERVICE_NAME: volteras-oracle
+DIMO_NODE_ENDPOINT: https://dis.dimo.zone/data
+IDENTITY_API_ENDPOINT: https://identity-api.dimo.zone/query
+JWT_KEY_SET_URL: https://auth.dimo.zone/keys
+IS_CONSUMER_ENABLED: false
+DEVICE_DEFINITIONS_API_ENDPOINT: https://device-definitions-api.dimo.zone
+DIMO_AUTH_URL: https://auth.dimo.zone
+DIMO_AUTH_DOMAIN: https://volteras.dimo.zone
+DIMO_AUTH_CLIENT_ID: '0x' # your client id from dimo dev consolo
+
+EXTERNAL_VENDOR_APIURL: 'https://your-api.xyz/api'
+
+KAFKA_BROKERS: 'localhost:9092'
+
+CHAIN_ID: 137
+VEHICLE_NFT_ADDRESS: '0xbA5738a18d83D41847dfFbDC6101d37C69c9B0cF'
+SYNTHETIC_NFT_ADDRESS: '0x4804e8D1661cd1a1e5dDdE1ff458A7f878c0aC6D'
+REGISTRY_ADDRESS: '0xFA8beC73cebB9D88FF88a2f75E7D7312f2Fd39EC'
+ENABLE_VENDOR_CAPABILITY_CHECK: false
+ENABLE_VENDOR_CONNECTION: false
+
+DEVELOPER_AA_WALLET_ADDRESS: '0x'
+SD_WALLETS_SEED: '123e5901b5814d1237a39af36ca123d69bdb3c938ebf123c869f112357f20123' # generate your own or we can help

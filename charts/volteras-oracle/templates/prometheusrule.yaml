@@ -1,0 +1,10 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  namespace: {{ .Release.Namespace }}
+  name: {{ include "dimo-oracle.fullname" . }}-alerts
+  labels:
+    {{- include "dimo-oracle.labels" . | nindent 4 }}
+spec:
+  {{- include "alerts" . | nindent 2 }}
+

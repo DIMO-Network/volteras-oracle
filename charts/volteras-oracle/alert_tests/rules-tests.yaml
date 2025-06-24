@@ -1,0 +1,43 @@
+rule_files:
+  - alerts-modified.yaml
+
+evaluation_interval: 1m
+
+tests:
+  - interval: 1m
+    # Series data.
+    input_series:
+      - series: 'dimo_oracle_failed_status_events_total{namespace="dev", container="dimo-oracle"}'
+        values: '20 40 60 80 100 120 140 160 180 200'
+      - series: 'dimo_oracle_success_status_event_total{namespace="dev", container="dimo-oracle"}'
+        values: '100 200 300 400 500 600 700 800 900 1000'
+
+    alert_rule_test:
+      - eval_time: 10m
+        alertname: HighFailureRatePercentage
+        exp_alerts:
+          - exp_labels:
+              severity: critical
+              service: dimo-oracle-service
+              namespace: dev
+            exp_annotations:
+              summary: "High failure rate percentage detected"
+              description: "The percentage of failed status events is above 10% for more than 5 minutes. Service: dimo-oracle"
+# I was struggling to write unit tests for hour() function, since  all time-related functions start at the timestamp 0
+#  - interval: 12m
+#    # Series data.
+#    input_series:
+#      - series: 'dimo_oracle_success_status_event_total{namespace="dev", container="dimo-oracle"}'
+#        values: '0+0x24'
+#
+#    alert_rule_test:
+#      - eval_time: 120m
+#        alertname: NoDataReceived
+#        exp_alerts:
+#          - exp_labels:
+#              severity: critical
+#              service: dimo-oracle-service
+#              namespace: dev
+#            exp_annotations:
+#              summary: "No data received from 9 AM to 10 PM"
+#              description: "No data has been received from 9 AM to 10 PM for the past hour. Service: dimo-oracle"

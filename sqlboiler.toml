@@ -1,0 +1,12 @@
+output = "internal/db/models"
+no-tests = true
+
+[psql]
+dbname = "volteras_oracle"
+blacklist = ["migrations", "river_client", "river_client_queue", "river_job", "river_leader", "river_migration", "river_queue"]
+host   = "localhost"
+port   = 5432
+user   = "dimo"
+pass   = "dimo"
+schema = "volteras_oracle"
+sslmode= "disable"

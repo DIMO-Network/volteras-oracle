@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.certificate.caConfigMap }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "dimo-oracle.labels" . | nindent 4 }}
+data:
+  root_ca.crt: |-
+    -----BEGIN CERTIFICATE-----
+    MIIBlDCCATqgAwIBAgIQO4itVcQYne77aaZiUkapzjAKBggqhkjOPQQDAjAXMRUw
+    EwYDVQQDEwxESU1PIENBIFJvb3QwIBcNMjIwNDIzMTA1ODExWhgPMjEyMjAzMzAx
+    MDU4MTFaMBcxFTATBgNVBAMTDERJTU8gQ0EgUm9vdDBZMBMGByqGSM49AgEGCCqG
+    SM49AwEHA0IABBS963lJGW22HgoE7uR48wHfJY/kOih8wPAc3VhnBEyYYVNzkPJV
+    jziMwCYGnz6D7237mEgzUUzJpdKqIvC1rHqjZjBkMA4GA1UdDwEB/wQEAwIBBjAS
+    BgNVHRMBAf8ECDAGAQH/AgEBMB0GA1UdDgQWBBRy+hGhRil/aAElKqDplez8AS97
+    fTAfBgNVHSMEGDAWgBRy+hGhRil/aAElKqDplez8AS97fTAKBggqhkjOPQQDAgNI
+    ADBFAiBX3cQDsz1j+5M5f943vu2nmX4SUQ1T+XQwF9fPcagr/AIhANC1iQbHUAtz
+    VJfn+Y6hzMyVYhAcbfzSwFPY1XtEbsNh
+    -----END CERTIFICATE-----

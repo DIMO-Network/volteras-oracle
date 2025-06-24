@@ -1,0 +1,127 @@
+replicaCount: 1
+image:
+  repository: dimozone/volteras-oracle
+  pullPolicy: IfNotPresent
+  tag: 0.7.0
+imagePullSecrets: []
+nameOverride: ''
+fullnameOverride: ''
+serviceAccount:
+  create: true
+  annotations: {}
+  name: ''
+podAnnotations: {}
+podSecurityContext:
+  runAsNonRoot: true
+  runAsUser: 1000
+  runAsGroup: 1001
+securityContext:
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop:
+      - all
+env:
+  ENVIRONMENT: prod
+  PORT: '8080'
+  MONITORING_PORT: '8888'
+  LOG_LEVEL: info
+  DIMO_NODE_ENDPOINT: https://dis.dimo.zone/data
+  IDENTITY_API_ENDPOINT: https://identity-api.dimo.zone/query
+  DB_PORT: '5432'
+  DB_NAME: oracle_example
+  DB_MAX_OPEN_CONNECTIONS: '20'
+  DB_MAX_IDLE_CONNECTIONS: '6'
+  DB_SSL_MODE: require
+  JWT_KEY_SET_URL: https://auth.dimo.zone/keys
+  IS_TELEMETRY_CONSUMER_ENABLED: true
+  IS_OPERATIONS_CONSUMER_ENABLED: true
+  KAFKA_BROKERS: my-kafka.svc REPLACE_ME
+  OPERATIONS_TOPIC: operations-topic
+  OPERATIONS_CONSUMER_GROUP: dimo-volteras-oracle
+  UNBUFFERED_TELEMETRY_TOPIC: unbuffered-telemetry REPLACE_ME
+  UNBUFFERED_TELEMETRY_CONSUMER_GROUP: dimo-oracle_example
+  DEVICE_DEFINITIONS_API_ENDPOINT: https://device-definitions-api.dimo.zone
+  DIMO_AUTH_URL: https://auth.dimo.zone
+  DIMO_AUTH_DOMAIN: https://volteras.dimo.zone
+  DIMO_AUTH_CLIENT_ID: 0x REPLACE_ME - from dev console
+  CHAIN_ID: 137
+  VEHICLE_NFT_ADDRESS: '0xbA5738a18d83D41847dfFbDC6101d37C69c9B0cF'
+  SYNTHETIC_NFT_ADDRESS: '0x4804e8D1661cd1a1e5dDdE1ff458A7f878c0aC6D'
+  REGISTRY_ADDRESS: '0xFA8beC73cebB9D88FF88a2f75E7D7312f2Fd39EC'
+  ENABLE_VENDOR_CAPABILITY_CHECK: true
+  ENABLE_VENDOR_CONNECTION: true
+  ENABLE_MINTING_WITH_CONNECTION_TOKEN_ID: false
+  CONNECTION_TOKEN_ID: ''
+certificate:
+  caConfigMap: cae-prod-dimo-ca-certs
+service:
+  type: ClusterIP
+  ports:
+    mon-http:
+      port: 8888
+      targetPort: mon-http
+      protocol: TCP
+    http:
+      port: 8080
+      targetPort: http
+      protocol: TCP
+ports:
+  - name: mon-http
+    containerPort: 8888
+    protocol: TCP
+  - name: http
+    containerPort: 8080
+    protocol: TCP
+livenessProbe:
+  tcpSocket:
+    port: mon-http
+  initialDelaySeconds: 5
+  periodSeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 3
+  successThreshold: 1
+readinessProbe:
+  tcpSocket:
+    port: mon-http
+  initialDelaySeconds: 10
+  periodSeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 3
+  successThreshold: 1
+ingress:
+  enabled: true
+  className: nginx
+  annotations:
+    nginx.ingress.kubernetes.io/auth-tls-secret: ingress/cf-origin-ca
+    nginx.ingress.kubernetes.io/auth-tls-verify-client: 'on'
+    nginx.ingress.kubernetes.io/enable-cors: 'true'
+    nginx.ingress.kubernetes.io/cors-allow-origin: https://fleet-onboard.dimo.org
+    external-dns.alpha.kubernetes.io/hostname: your-url-replace_me
+  hosts:
+    - host: your-url-replace_me
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+resources:
+  limits:
+    cpu: 1
+    memory: 1024Mi
+  requests:
+    cpu: 100m
+    memory: 256Mi
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+nodeSelector: {}
+tolerations: []
+affinity: {}
+podDisruptionBudget:
+  minAvailable: 1
+serviceMonitor:
+  enabled: true
+  path: /metrics
+  port: mon-http
+  interval: 30s

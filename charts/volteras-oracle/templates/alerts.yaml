@@ -1,0 +1,23 @@
+{{- define "alerts" -}}
+groups:
+  - name: dimo-oracle-service
+    rules:
+      - alert: NoDataReceived
+        expr: sum(rate(dimo_oracle_success_status_event_total{namespace="{{ .Release.Namespace }}", container="dimo-oracle"}[1h])) BY (pod, job, namespace) == 0  and ON() hour(vector(time())) > 14 < 24
+        for: 1h
+        labels:
+          severity: critical
+          service: dimo-oracle-service
+        annotations:
+          summary: "No data received from 9 AM to 8 PM"
+          description: "No data has been received from 9 AM to 8 PM for the past hour. Service: dimo-oracle"
+      - alert: HighFailureRatePercentage
+        expr: sum(rate(dimo_oracle_failed_status_events_total{namespace="{{ .Release.Namespace }}", container="dimo-oracle"}[5m])) BY (pod, job, namespace)  / sum(rate(dimo_oracle_success_status_event_total{namespace="{{ .Release.Namespace }}", container="dimo-oracle"}[5m])) BY (pod, job, namespace) + sum(rate(dimo_oracle_failed_status_events_total{namespace="{{ .Release.Namespace }}", container="dimo-oracle"}[5m]))BY (pod, job, namespace) > 0.1
+        for: 5m
+        labels:
+          severity: critical
+          service: dimo-oracle-service
+        annotations:
+          summary: "High failure rate percentage detected"
+          description: "The percentage of failed status events is above 10% for more than 5 minutes. Service: dimo-oracle"
+{{- end -}}
