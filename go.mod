@@ -17,7 +17,7 @@ require (
 	github.com/ethereum/go-ethereum v1.15.9
 	github.com/friendsofgo/errors v0.9.2
 	github.com/gofiber/contrib/jwt v1.1.0
-	github.com/gofiber/fiber/v2 v2.52.6
+	github.com/gofiber/fiber/v2 v2.52.7
 	github.com/golang-jwt/jwt/v5 v5.2.2
 	github.com/google/subcommands v1.2.0
 	github.com/jackc/pgx/v5 v5.7.4
@@ -29,7 +29,6 @@ require (
 	github.com/riverqueue/river v0.20.2
 	github.com/riverqueue/river/riverdriver/riverpgxv5 v0.20.2
 	github.com/rs/zerolog v1.34.0
-	github.com/segmentio/ksuid v1.0.4
 	github.com/stretchr/testify v1.10.0
 	github.com/testcontainers/testcontainers-go v0.36.0
 	github.com/tidwall/gjson v1.18.0
