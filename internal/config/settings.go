@@ -16,10 +16,9 @@ type Settings struct {
 	JwtKeySetURL   string      `yaml:"JWT_KEY_SET_URL"` // DIMO JWT key set.
 
 	// Just an example - Communication and Auth with your external system. Should all be secrets
-	ExternalVendorAPIURL string `yaml:"EXTERNAL_VENDOR_APIURL"` // your system's api url
-	ClientID             string `yaml:"CLIENT_ID"`              // auth client id example
-	ClientSecret         string `yaml:"CLIENT_SECRET"`          // auth secret example
-	Audience             string `yaml:"AUDIENCE"`               // some other parameter you may need
+	VolterasAPIURL       string `yaml:"VOLTERAS_API_URL"`       // your system's api url
+	VolterasClientID     string `yaml:"VOLTERAS_CLIENT_ID"`     // auth client id example
+	VolterasClientSecret string `yaml:"VOLTERAS_CLIENT_SECRET"` // auth secret example
 
 	// Kafka - in this example we stream from kafka
 	IsTelemetryConsumerEnabled  bool   `yaml:"IS_TELEMETRY_CONSUMER_ENABLED"`
