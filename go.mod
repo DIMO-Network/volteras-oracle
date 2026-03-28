@@ -29,7 +29,6 @@ require (
 	github.com/riverqueue/river v0.20.2
 	github.com/riverqueue/river/riverdriver/riverpgxv5 v0.20.2
 	github.com/rs/zerolog v1.34.0
-	github.com/segmentio/ksuid v1.0.4
 	github.com/stretchr/testify v1.10.0
 	github.com/testcontainers/testcontainers-go v0.36.0
 	github.com/tidwall/gjson v1.18.0
@@ -50,13 +49,12 @@ require (
 	github.com/andybalholm/brotli v1.1.1 // indirect
 	github.com/avast/retry-go/v4 v4.6.1 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
-	github.com/bits-and-blooms/bitset v1.17.0 // indirect
+	github.com/bits-and-blooms/bitset v1.20.0 // indirect
 	github.com/btcsuite/btcd/btcec/v2 v2.2.0 // indirect
 	github.com/btcsuite/btcd/chaincfg/chainhash v1.1.0 // indirect
 	github.com/cenkalti/backoff/v4 v4.3.0 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
-	github.com/consensys/bavard v0.1.22 // indirect
-	github.com/consensys/gnark-crypto v0.14.0 // indirect
+	github.com/consensys/gnark-crypto v0.18.1 // indirect
 	github.com/containerd/log v0.1.0 // indirect
 	github.com/containerd/platforms v0.2.1 // indirect
 	github.com/cpuguy83/dockercfg v0.3.2 // indirect
@@ -104,7 +102,6 @@ require (
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/mattn/go-runewidth v0.0.16 // indirect
 	github.com/mfridman/interpolate v0.0.2 // indirect
-	github.com/mmcloughlin/addchain v0.4.0 // indirect
 	github.com/moby/docker-image-spec v1.3.1 // indirect
 	github.com/moby/go-archive v0.1.0 // indirect
 	github.com/moby/patternmatcher v0.6.0 // indirect
@@ -163,5 +160,4 @@ require (
 	google.golang.org/grpc v1.72.0 // indirect
 	google.golang.org/protobuf v1.36.6 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
-	rsc.io/tmplfunc v0.0.3 // indirect
 )
